@@ -1,0 +1,137 @@
+<!-- component -->
+<div aria-label="card" class="p-8 rounded-3xl bg-white max-w-sm w-[1000px] shadow-lg">
+  <div aria-label="header" class="flex items-center space-x-2 h-100">
+    <div class="w-[40px] h-[40px] border-2 border-gray-800 rounded-full flex justify-center">
+      <img src="{{offer?.recruiter?.images[0]?.url}}" class="rounded-full object-contain">
+    </div>
+    <div class="space-y-0.5 flex-1">
+      <h3
+        class="font-medium text-lg tracking-tight text-gray-900 leading-tight"
+      >
+        {{ offer?.title }}
+      </h3>
+      <p class="text-sm font-normal text-gray-400 leading-none">
+        {{ offer?.city }}
+      </p>
+    </div>
+    <a
+      routerLink="/{{offer?.id}}/apply"
+      class="inline-flex items-center shrink-0 justify-center w-8 h-8 rounded-full text-white bg-gray-900 focus:outline-none"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-5 h-5"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M17 7l-10 10"></path>
+        <path d="M8 7l9 0l0 9"></path>
+      </svg>
+    </a>
+  </div>
+  <div class="flex justify-center mb-4 mt-4">
+    <div class="border-b-2 border-gray-200 w-full">
+      <ul class="flex justify-around">
+        <li class="text-center">
+          <button (click)="showTab('Offer')"
+                  [class]="Tab == 'Offer' ? 'text-black pb-2 border-b-2 border-black font-semibold' : 'text-gray-500' ">
+            Offer
+          </button>
+        </li>
+        <li class="text-center">
+          <button (click)="showTab('Recruiter')"
+                  [class]="Tab == 'Recruiter' ? 'text-black pb-2 border-b-2 border-black font-semibold' : 'text-gray-500'">
+            Company
+          </button>
+        </li>
+        <li class="text-center">
+          <button (click)="showTab('Applicants')"
+                  [class]="Tab == 'Applicants' ? 'text-black pb-2 border-b-2 border-black font-semibold' : 'text-gray-500'">
+            Info
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="tab_body">
+    <div *ngIf="Tab == 'Offer'"
+         class="bg-white h-[400px] rounded-lg overflow-hidden border-gray-800 border transition-transform transform hover:scale-105 h-100">
+      <div class="p-1 bg-black">
+      </div>
+      <div class="p-8">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">{{ offer.city }}</h2>
+        <p class="text-gray-600 mb-6">{{ offer.description }}</p>
+        <p class="text-4xl font-bold text-gray-800 mb-6">{{ offer?.title }}</p>
+        <ul class="text-sm text-gray-600 mb-6">
+          <li class="mb-2 flex items-center">
+            <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M5 13l4 4L19 7"></path>
+            </svg>
+            {{ offer?.profile }}
+          </li>
+          <li class="mb-2 flex items-center">
+            <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M5 13l4 4L19 7"></path>
+            </svg>
+            {{ offer?.salary }} DH
+          </li>
+          <li class="flex items-center">
+            <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M5 13l4 4L19 7"></path>
+            </svg>
+            {{ offer?.level }}
+          </li>
+        </ul>
+      </div>
+      <div class="p-4">
+      </div>
+    </div>
+    <div *ngIf="Tab == 'Recruiter'"
+         class="bg-white h-[400px] rounded-lg overflow-hidden border-gray-800 border transition-transform transform hover:scale-105 h-120">
+      <div class="p-1 bg-black">
+      </div>
+      <div class="w-40 h-40 border-2 border-gray-800 rounded-full flex justify-center mx-auto mt-6 mb-6">
+        <img src="{{offer?.recruiter?.images[0]?.url}}" alt="Profile"
+             class="rounded-full p-1 w-50 h-50 object-contain">
+      </div>
+      <div class="text-center mb-4">
+        <h2 class="text-xl font-semibold">{{ offer.recruiter?.name }}</h2>
+        <p class="text-gray-600">{{ offer.recruiter?.email }}</p>
+      </div>
+      <div class="grid gap-4 flex justify-center">
+        <button class="bg-gray-700 hover:bg-black text-white font-bold py-2 px-4 rounded w-fit">
+          Consult profile
+        </button>
+      </div>
+      <div class="p-4">
+      </div>
+    </div>
+    <div *ngIf="Tab == 'Applicants'"
+         class="bg-white h-[400px] rounded-lg overflow-hidden border-gray-800 border transition-transform transform hover:scale-105 h-120">
+      <div class="p-1 bg-black">
+      </div>
+      <div class="flex justify-center content-center items-center mb-6 mt-6 h-40 text-3xl">
+        {{ offer?.applications?.length }}
+      </div>
+      <div class="text-center mb-4">
+        <h2
+          class="text-xl font-semibold">{{ offer?.applications?.length == 0 ? 'No Applicants' : offer?.applications?.length + ' Applicants' }}</h2>
+      </div>
+      <div class="p-4">
+      </div>
+    </div>
+  </div>
+</div>
