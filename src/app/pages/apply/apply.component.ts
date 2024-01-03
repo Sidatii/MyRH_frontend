@@ -4,7 +4,7 @@ import {DndDirective} from "./dnd.directive";
 import {NgForOf} from "@angular/common";
 import {Application} from "../../interface/application";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ToastService} from "angular-toastify";
+import {AngularToastifyModule, ToastService} from "angular-toastify";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ApplicationService} from "../../services/application/application.service";
 
@@ -14,13 +14,14 @@ import {ApplicationService} from "../../services/application/application.service
   imports: [
     DndDirective,
     NgForOf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularToastifyModule
   ],
   templateUrl: './apply.component.html',
   styleUrl: './apply.component.css'
 })
 export class ApplyComponent {
-  offer: any;
+  offer: string = "1";
   application: any = [];
 
   fileList: any[] = [];
@@ -61,16 +62,20 @@ export class ApplyComponent {
   public applicationForm: FormGroup = new FormGroup({
     fullName: new FormControl("", Validators.required),
     email: new FormControl("", Validators.required),
+    fileList: new FormControl("", Validators.required),
   });
 
   public submit() {
-    console.log(this.applicationForm.value)
-    const application: Application = this.applicationForm.value
-    application.offer = this.offer;
-    application.fileList = this.fileList;
-    application.fullName = this.applicationForm.value.fullName;
-    application.email = this.applicationForm.value.email;
-    this._service.create(application).subscribe({
+    // console.log(this.applicationForm.value)
+    const formData = new FormData();
+    formData.append("fullName", this.applicationForm.value.fullName);
+    formData.append("email", this.applicationForm.value.email);
+    formData.append("offer", this.offer);
+    for (let file of this.fileList) {
+      formData.append("fileList", file);
+    }
+    console.log(formData.get("fileList"));
+    this._service.create(formData).subscribe({
       next: response => {
         this.__router.navigate([""]);
         this.__toast.success("Competition Created Successfully");

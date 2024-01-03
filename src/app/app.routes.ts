@@ -6,5 +6,5 @@ import {OffersComponent} from "./pages/offers/offers.component";
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'offers', component: OffersComponent },
-  { path: 'apply', component: ApplyComponent },
+  { path: 'apply/:id', component: ApplyComponent },
 ];

@@ -3,17 +3,19 @@
   <!-- Author: FormBold Team -->
   <!-- Learn More: https://formbold.com -->
   <div class="mx-auto w-full max-w-[550px] bg-white">
+    <lib-toastify-toast-container></lib-toastify-toast-container>
     <form [formGroup]="applicationForm" (submit)="submit()"
       class="py-6 px-9"
     >
       <div class="mb-5">
         <label
-          for="email"
+          for="fullName"
           class="mb-3 block text-base font-medium text-[#07074D]"
         >
           Your Full Name
         </label>
         <input
+          formControlName="fullName"
           type="text"
           name="fullName"
           id="fullName"
@@ -29,6 +31,7 @@
           Your Email
         </label>
         <input
+          formControlName="email"
           type="email"
           name="email"
           id="email"

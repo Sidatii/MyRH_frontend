@@ -11,7 +11,8 @@ export class ApplicationService {
 
   constructor(private _http: HttpClient) { }
 
-  create(application: Application): Observable<Application> {
+  create(application: any): Observable<Application> {
+    console.log(application)
     return this._http.post<Application>(environment.API_URL + '/application/create', application);
   }
 
